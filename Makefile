@@ -76,9 +76,18 @@ postgres: test
 mysql: export DATABASE = mysql
 mysql: export REFORM_DRIVER = mysql
 mysql: export REFORM_ROOT_SOURCE = root@/mysql
-mysql: export REFORM_INIT_SOURCE = root@/reform-database?parseTime=true&time_zone='UTC'&sql_mode='ANSI'&multiStatements=true
+mysql: export REFORM_INIT_SOURCE = root@/reform-database?parseTime=true&time_zone='UTC'&sql_mode='ANSI'
 mysql: export REFORM_TEST_SOURCE = root@/reform-database?parseTime=true&time_zone='America%2FNew_York'
 mysql: test
+	make test-db
+
+# create local MySQL database and run tests with MySQL X Protocol
+mysqlx: export DATABASE = mysql
+mysqlx: export REFORM_DRIVER = mysqlx
+mysqlx: export REFORM_ROOT_SOURCE = tcp://root@127.0.0.1:33060/
+mysqlx: export REFORM_INIT_SOURCE = tcp://root@127.0.0.1:33060/reform-database?time_zone=UTC&sql_mode=ANSI
+mysqlx: export REFORM_TEST_SOURCE = tcp://root@127.0.0.1:33060/reform-database?time_zone=UTC&sql_mode=ANSI
+mysqlx: test
 	make test-db
 
 # create local SQLite3 database and run tests
