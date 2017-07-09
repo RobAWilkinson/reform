@@ -9,6 +9,7 @@ download_deps:
 	# download drivers
 	go get -v -u -d github.com/lib/pq \
 		github.com/go-sql-driver/mysql \
+		github.com/AlekSi/mysqlx \
 		github.com/mattn/go-sqlite3 \
 		github.com/denisenkom/go-mssqldb
 
